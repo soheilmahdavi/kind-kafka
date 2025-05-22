@@ -13,7 +13,7 @@ Two Python micro-services illustrate how internal applications can publish to, a
 
 ## Table of Contents
 1. [Prerequisites](##Prerequisites)  
-2. [Build & Push Images](##Build & Push Images)  
+2. [Build & Push Images](#build--push-images)  
 3. [Deploy to Kubernetes](#deploy-to-kubernetes)  
 4. [Optional – Run a Broker in kind](#optional--run-a-broker-in-kind)  
 5. [Clean-up](#clean-up)  
@@ -55,6 +55,24 @@ helm install kafka bitnami/kafka \
   --set zookeeper.enabled=true
 ```
 
+## Image-Hardening Checklist
+Minimal base – distroless Debian 12.
+
+Non-root – USER nonroot; read-only root filesystem.
+
+Capability drop – capDrop: ["ALL"].
+
+Multi-stage build – compilers & pip cache stay in builder layer.
+
+Tag & digest pinning – prevents “latest” drift.
+
+SBOM + scan – CycloneDX + Trivy/Grype in CI.
+
+Sign & verify – cosign + admission policy.
+
+Runtime defence – Falco rules; Pod Security baseline or higher.
+
+CIS Benchmarks – automated with docker-bench, kube-bench.
 
 ## Monitoring & Observability
 
