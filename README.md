@@ -41,7 +41,7 @@ docker push localhost:5000/kafka-producer:1.0.0
 docker push localhost:5000/kafka-consumer:1.0.0
 ```
 
-##deploy-to-kubernetes
+## deploy-to-kubernetes
 ```bash
 kubectl apply -f infra/k8s/
 ```
@@ -54,25 +54,31 @@ helm install kafka bitnami/kafka \
   --set auth.enabled=false \
   --set zookeeper.enabled=true
 ```
+## Clean-up
+```bash
+helm uninstall kafka                 # remove optional broker
+kubectl delete -f infra/k8s/         # remove producer / consumer resources
+```
 
 ## Image-Hardening Checklist
-Minimal base – distroless Debian 12.
 
-Non-root – USER nonroot; read-only root filesystem.
+* Minimal base – distroless Debian 12.
 
-Capability drop – capDrop: ["ALL"].
+* Non-root – USER nonroot; read-only root filesystem.
 
-Multi-stage build – compilers & pip cache stay in builder layer.
+* Capability drop – capDrop: ["ALL"].
 
-Tag & digest pinning – prevents “latest” drift.
+* Multi-stage build – compilers & pip cache stay in builder layer.
 
-SBOM + scan – CycloneDX + Trivy/Grype in CI.
+* Tag & digest pinning – prevents “latest” drift.
 
-Sign & verify – cosign + admission policy.
+* SBOM + scan – CycloneDX + Trivy/Grype in CI.
 
-Runtime defence – Falco rules; Pod Security baseline or higher.
+* Sign & verify – cosign + admission policy.
 
-CIS Benchmarks – automated with docker-bench, kube-bench.
+* Runtime defence – Falco rules; Pod Security baseline or higher.
+
+* CIS Benchmarks – automated with docker-bench, kube-bench.
 
 ## Monitoring & Observability
 
@@ -82,3 +88,13 @@ CIS Benchmarks – automated with docker-bench, kube-bench.
 | Logs     | **Grafana Loki** (or EFK)                | JSON logs → **promtail** / **Fluent Bit**                                                                         |
 | Traces   | **OpenTelemetry Collector** → **Tempo** (or Jaeger) | Auto-instrument Python; trace producer → broker → consumer spans                                                  |
 | Alerts   | **Alertmanager**                         | Lag thresholds, under-replicated partitions, broker down, high 5xx error rate                                     |
+
+```text
+[Producer Pod] --/metrics--> Prometheus
+        |                     |
+        |--stdout(JSON)--> promtail --> Loki
+        |--OTLP gRPC-------> Otel-Collector --> Tempo
+[Kafka Brokers]--JMX-------> Prometheus
+
+Grafana dashboards ← all data sources
+```
