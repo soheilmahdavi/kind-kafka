@@ -98,3 +98,12 @@ kubectl delete -f infra/k8s/         # remove producer / consumer resources
 
 Grafana dashboards ← all data sources
 ```
+
+
+## Quick Links
+
+* Kind + local registry https://kind.sigs.k8s.io/docs/user/local-registry/
+
+* Bitnami Kafka chart https://github.com/bitnami/charts/tree/master/bitnami/kafka
+
+* Prometheus Operator https://github.com/prometheus-operator/prometheus-operator
