@@ -12,8 +12,8 @@ Two Python micro-services illustrate how internal applications can publish to, a
 ---
 
 ## Table of Contents
-1. [Prerequisites](##prerequisites)  
-2. [Build & Push Images](#build--push-images)  
+1. [Prerequisites](##Prerequisites)  
+2. [Build & Push Images](##Build & Push Images)  
 3. [Deploy to Kubernetes](#deploy-to-kubernetes)  
 4. [Optional – Run a Broker in kind](#optional--run-a-broker-in-kind)  
 5. [Clean-up](#clean-up)  
@@ -41,7 +41,7 @@ docker push localhost:5000/kafka-producer:1.0.0
 docker push localhost:5000/kafka-consumer:1.0.0
 ```
 
-## Deploy to Kubernetes
+##deploy-to-kubernetes
 ```bash
 kubectl apply -f infra/k8s/
 ```
@@ -54,3 +54,13 @@ helm install kafka bitnami/kafka \
   --set auth.enabled=false \
   --set zookeeper.enabled=true
 ```
+
+
+## Monitoring & Observability
+
+| Plane    | Stack                                    | Instrumentation                                                                                                  |
+|----------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| Metrics  | **Prometheus Operator** + **Grafana**    | • Kafka via **JMX Exporter** / **Kafka Exporter** (lag, ISR, throughput)<br>• Micro-services expose `/metrics` with `prometheus_client` |
+| Logs     | **Grafana Loki** (or EFK)                | JSON logs → **promtail** / **Fluent Bit**                                                                         |
+| Traces   | **OpenTelemetry Collector** → **Tempo** (or Jaeger) | Auto-instrument Python; trace producer → broker → consumer spans                                                  |
+| Alerts   | **Alertmanager**                         | Lag thresholds, under-replicated partitions, broker down, high 5xx error rate                                     |
