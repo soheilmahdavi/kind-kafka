@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kafka-producer
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never          # one-shot
+      containers:
+      - name: producer
+        image: localhost:5000/kafka-producer:1.0.6
+        envFrom:
+        - configMapRef:
+            name: kafka-producer-config
+ #       - secretRef:
+ #           name: kafka-producer-credentials
+        env:
+        - name: KAFKA_BOOTSTRAP_SERVER
+          value: kafka.default.svc.cluster.local:9092
+        - name: KAFKA_SECURITY_PROTOCOL
+          value: PLAINTEXT
+        - name: KAFKA_SASL_MECHANISM
+          value: ""
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

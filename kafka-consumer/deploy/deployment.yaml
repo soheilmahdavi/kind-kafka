@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-consumer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: kafka-consumer
+    spec:
+      containers:
+      - name: consumer
+        image: localhost:5000/kafka-consumer:1.0.6
+        envFrom:
+        - configMapRef:
+            name: kafka-consumer-config
+        - secretRef:
+            name: kafka-consumer-credentials
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        readinessProbe:
+          exec: { command: ["sh","-c","echo ok"] }
+          periodSeconds: 30
+        livenessProbe:
+          exec: { command: ["sh","-c","echo ok"] }
+          periodSeconds: 60

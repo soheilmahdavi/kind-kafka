@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kafka-producer
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never        # one-shot
+      containers:
+      - name: producer
+        image: ghcr.io/your-org/kafka-producer:1.0.0 # TODO: change to local image
+        envFrom:
+        - configMapRef:
+            name: kafka-app-config
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

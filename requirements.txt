@@ -1,0 +1,5 @@
+kafka-python==2.0.2
+python-dotenv==0.17.1
+
+pip~=23.2.1
+wheel~=0.41.2
