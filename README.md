@@ -39,10 +39,12 @@ docker build -t localhost:5000/kafka-consumer:1.0.0 -f kafka-consumer/Dockerfile
 # push to your local registry (kind-registry on :5000)
 docker push localhost:5000/kafka-producer:1.0.0
 docker push localhost:5000/kafka-consumer:1.0.0
+```
 
 ## Deploy to Kubernetes
 ```bash
 kubectl apply -f infra/k8s/
+```
 
 ## Optional – Run a Broker in kind
 ```bash
@@ -51,3 +53,4 @@ helm install kafka bitnami/kafka \
   --set replicaCount=1 \
   --set auth.enabled=false \
   --set zookeeper.enabled=true
+```
