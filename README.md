@@ -96,7 +96,7 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 <!-- Local / relative path -->
 ![Brief alt text](images/Metrics.png)
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/LOGs.jpg" width="300">
+<img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/metrics.png" width="600">
 </h1><br>
 * Kafka pod – jvm metrics are exported via jmx exporter.
 
@@ -108,7 +108,11 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 
 * Dashboards feed into Grafana for real time visualisation
 
+### LOGs
 
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/LOGs.jpg" width="600">
+</h1><br>
 
 
 ## Quick Links
