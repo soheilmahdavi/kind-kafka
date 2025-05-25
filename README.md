@@ -89,7 +89,7 @@ kubectl delete -f infra/k8s/         # remove producer / consumer resources
 | Traces   | **OpenTelemetry Collector** → **Tempo** (or Jaeger) | Auto-instrument Python; trace producer → broker → consumer spans                                                  |
 | Alerts   | **Alertmanager**                         | Lag thresholds, under-replicated partitions, broker down, high 5xx error rate                                     |
 
-
+---
 ### Metrics
 Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service pods, and the Prometheus → Grafana / Alertmanager stack:
 
@@ -109,6 +109,7 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 
 * Dashboards feed into Grafana for real time visualisation
 
+---
 ### LOGs “Kubernetes Logging with Grafana Loki”
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/LOGs.jpg" width="600">
@@ -138,7 +139,7 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
   Dashboards let operators search or filter the logs with LogQL, correlate them with metrics, and build panels/alerts.
 
 
-
+---
 ### Tracing: OpenTelemetry + Tempo + Grafana
 
 <h1 align="center">
@@ -177,3 +178,5 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 * Prometheus Operator https://github.com/prometheus-operator/prometheus-operator
 
 * Loki Operator https://medium.com/@muppedaanvesh/a-hands-on-guide-to-kubernetes-logging-using-grafana-loki-%EF%B8%8F-b8d37ea4de13
+
+* Docker Image Hardning https://owasp.org/www-project-devsecops-guideline/latest/02f-Container-Vulnerability-Scanning
