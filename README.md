@@ -95,7 +95,9 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 
 <!-- Local / relative path -->
 ![Brief alt text](images/Metrics.png)
-
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/blob/main/docs/LOGs.jpg" width="300">
+</h1><br>
 * Kafka pod – jvm metrics are exported via jmx exporter.
 
 * Consumer / Producer – Python metrics on /metrics exposed by prometheus_client
