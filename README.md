@@ -94,7 +94,7 @@ kubectl delete -f infra/k8s/         # remove producer / consumer resources
 Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service pods, and the Prometheus → Grafana / Alertmanager stack:
 
 <!-- Local / relative path -->
-![Brief alt text](images/Metrics.png)
+![Brief alt text](https://github.com/soheilmahdavi/kind-kafka/blob/main/images/Metrics.png)
 
 * Kafka pod – jvm metrics are exported via jmx exporter.
 
