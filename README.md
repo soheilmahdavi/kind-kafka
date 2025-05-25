@@ -89,15 +89,24 @@ kubectl delete -f infra/k8s/         # remove producer / consumer resources
 | Traces   | **OpenTelemetry Collector** → **Tempo** (or Jaeger) | Auto-instrument Python; trace producer → broker → consumer spans                                                  |
 | Alerts   | **Alertmanager**                         | Lag thresholds, under-replicated partitions, broker down, high 5xx error rate                                     |
 
-```text
-[Producer Pod] --/metrics--> Prometheus
-        |                     |
-        |--stdout(JSON)--> promtail --> Loki
-        |--OTLP gRPC-------> Otel-Collector --> Tempo
-[Kafka Brokers]--JMX-------> Prometheus
 
-Grafana dashboards ← all data sources
-```
+### Metrics
+Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service pods, and the Prometheus → Grafana / Alertmanager stack:
+
+<!-- Local / relative path -->
+![Brief alt text](images/Metrics.png)
+
+* Kafka pod – jvm metrics are exported via jmx exporter.
+
+* Consumer / Producer – Python metrics on /metrics exposed by prometheus_client
+
+* ServiceMonitor – This is a custom resource created by Prometheus Operator in order to auto-scrape the Service endpoints.
+
+* Prometheus → Alertmanager → Slack – send alerts to a slack channel for on-call notification
+
+* Dashboards feed into Grafana for real time visualisation
+
+
 
 
 ## Quick Links
