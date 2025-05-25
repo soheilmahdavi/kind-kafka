@@ -95,6 +95,7 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 
 <!-- Local / relative path -->
 ![Brief alt text](https://github.com/soheilmahdavi/kind-kafka/blob/main/images/Metrics.png)
+![Local Image](images/Metrics.png)
 
 * Kafka pod – jvm metrics are exported via jmx exporter.
 
