@@ -98,6 +98,7 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/metrics.png" width="600">
 </h1><br>
+
 * Kafka pod – jvm metrics are exported via jmx exporter.
 
 * Consumer / Producer – Python metrics on /metrics exposed by prometheus_client
@@ -114,22 +115,19 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 </h1><br>
 
 
-What the diagram shows – 
 * Cluster layout
-At the left you see two “Worker Node” blocks.
-Each node runs several application containers.
 
-* Log collection on every node
+On the left, you have two “Worker Node” blocks. Each node has multiple application containers running.
 
-A Promtail agent runs as a DaemonSet, so there is one Promtail pod per node.
+* Gathering logs from each node
 
-Promtail tails each container’s stdout log file and attaches Kubernetes labels (namespace, pod, container, etc.).
+As a side note, a Prometheus server runs as a StatefulSet, while a Promtail agent runs as a DaemonSet, so there’s exactly one Promtail pod per node.
+
+Promtail tails the stdout log file of each container, and labels it with the name of the container as well as Kubernetes labels (namespace, pod, container, etc).
 
 * Shipping logs to Loki
 
-Dashed red arrows show Promtail pushing log streams to Loki over HTTP.
-
-A single Loki deployment receives, indexes and stores the logs.
+Dotted red arrows indicate Promtail pushing log streams to Loki via HTTP.
 
 * Loki Service
 
