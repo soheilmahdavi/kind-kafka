@@ -108,11 +108,37 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 
 * Dashboards feed into Grafana for real time visualisation
 
-### LOGs
-
+### LOGs “Kubernetes Logging with Grafana Loki”
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/LOGs.jpg" width="600">
 </h1><br>
+
+
+What the diagram shows – 
+* Cluster layout
+At the left you see two “Worker Node” blocks.
+Each node runs several application containers.
+
+* Log collection on every node
+
+A Promtail agent runs as a DaemonSet, so there is one Promtail pod per node.
+
+Promtail tails each container’s stdout log file and attaches Kubernetes labels (namespace, pod, container, etc.).
+
+* Shipping logs to Loki
+
+Dashed red arrows show Promtail pushing log streams to Loki over HTTP.
+
+A single Loki deployment receives, indexes and stores the logs.
+
+* Loki Service
+
+Kubernetes Service that fronts Loki. It exposes port 3100, which Promtail targets for ingestion and which Grafana uses for queries.
+
+* Visualization with Grafana
+
+Dashboards let operators search or filter the logs with LogQL, correlate them with metrics, and build panels/alerts.
+
 
 
 ## Quick Links
@@ -122,3 +148,5 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 * Bitnami Kafka chart https://github.com/bitnami/charts/tree/master/bitnami/kafka
 
 * Prometheus Operator https://github.com/prometheus-operator/prometheus-operator
+
+* Loki Operator https://medium.com/@muppedaanvesh/a-hands-on-guide-to-kubernetes-logging-using-grafana-loki-%EF%B8%8F-b8d37ea4de13
