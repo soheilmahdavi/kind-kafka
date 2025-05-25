@@ -93,10 +93,6 @@ kubectl delete -f infra/k8s/         # remove producer / consumer resources
 
 * SBOM + scan – CycloneDX + Trivy/Grype in CI.
 
-* Sign & verify – cosign + admission policy.
-
-* Runtime defence – Falco rules; Pod Security baseline or higher.
-
 * CIS Benchmarks – automated with docker-bench, kube-bench.
 
 ## Monitoring & Observability
