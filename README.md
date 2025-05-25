@@ -117,27 +117,56 @@ Here’s a visual of the metrics pipeline inside Kubernetes, your micro-service 
 
 * Cluster layout
 
-On the left, you have two “Worker Node” blocks. Each node has multiple application containers running.
+  On the left, you have two “Worker Node” blocks. Each node has multiple application containers running.
 
 * Gathering logs from each node
 
-As a side note, a Prometheus server runs as a StatefulSet, while a Promtail agent runs as a DaemonSet, so there’s exactly one Promtail pod per node.
+  A Prometheus server runs as a StatefulSet, while a Promtail agent runs as a DaemonSet, so there’s exactly one Promtail pod per node.
 
-Promtail tails the stdout log file of each container, and labels it with the name of the container as well as Kubernetes labels (namespace, pod, container, etc).
+  Promtail tails the stdout log file of each container, and labels it with the name of the container as well as Kubernetes labels (namespace, pod, container, etc).
 
 * Shipping logs to Loki
 
-Dotted red arrows indicate Promtail pushing log streams to Loki via HTTP.
+  Promtail pushing log streams to Loki via HTTP.
 
 * Loki Service
 
-Kubernetes Service that fronts Loki. It exposes port 3100, which Promtail targets for ingestion and which Grafana uses for queries.
+  Kubernetes Service that fronts Loki. It exposes port 3100, which Promtail targets for ingestion and which Grafana uses for queries.
 
 * Visualization with Grafana
 
-Dashboards let operators search or filter the logs with LogQL, correlate them with metrics, and build panels/alerts.
+  Dashboards let operators search or filter the logs with LogQL, correlate them with metrics, and build panels/alerts.
 
 
+
+### Tracing: OpenTelemetry + Tempo + Grafana
+
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/Trace.jpg" width="600">
+</h1><br>
+
+* OpenTelemetry SDK / auto-instrumentation
+
+    creates spans for every request, Kafka publish/consume, DB call, etc.
+
+
+* OpenTelemetry Collector (cluster service)
+
+    receives OTLP spans from all pods, adds Kubernetes labels, batches & samples.
+
+    exports the processed spans to the tracing backend.
+
+* Grafana Tempo (tracing backend)
+
+    ingests the spans, compresses them, stores them in storage.
+
+
+* Grafana (UI)
+
+    is configured with a Tempo datasource → can search traces by service / latency / errors.
+
+
+---
 
 ## Quick Links
 
