@@ -1,4 +1,23 @@
-# ÖBB DevOps Assessment – Kafka Prototype
+# Tasks
+1. Containerization
+  - [x] Create a Dockerfile for each microservice.
+  - [x] Choose an appropriate base image and install the necessary dependencies.  
+2. Kubernetes Manifests 
+  - [x] Write the required Kubernetes manifest files (e.g., deployment, job) for each micro service to deploy them 
+        to a Kubernetes cluster.  
+
+3. Bonus Questions  
+
+  - [x] Discuss Monitoring: Kafka and the connected applications need to be monitored for health and performance.  
+        What monitoring technology stack would you recommend collecting, store and visualize observability data 
+        (metrics, logs, traces)? 
+  - [ ] Briefly explain how you would implement observability for Kafka and the micro services.  
+        Discuss Image Hardening: To minimize the attack vector on our applications, we apply "image hardening" when 
+        building our Docker images.  
+  - [ ] What aspects would you consider?
+
+
+#  DevOps Assessment – Kafka Prototype
 
 Two Python micro-services illustrate how internal applications can publish to, and consume from, ÖBB’s Kafka integration platform.
 
