@@ -4,9 +4,9 @@
 </h1><br>
 
 
-Explanation of Components:
+## Explanation of Components:
 
-1. Data Collection & Storage
+### 1. Data Collection & Storage
 
 * Role: Storage and versioning of raw image data.
 
@@ -14,7 +14,7 @@ Explanation of Components:
 
 * Rationale: scalable, reliable, affordable storage devices and services are now available, ideal for storing image and versions on.
 
-2. Preprocessing of Data and Features Extraction
+### 2. Preprocessing of Data and Features Extraction
 
 * Role: Cleanse, resize, normalize and extract features from raw image data.
 
@@ -22,7 +22,7 @@ Explanation of Components:
 
 * Rationale: Workflow automation, being able to reproduce the preprocessing and use it as part of ML workflows.
 
-3. Model Training
+### 3. Model Training
 
 * Role: Training and validation of ML models with automated standardized workflows.
 
@@ -30,7 +30,7 @@ Explanation of Components:
 
 * Explanation: Kubeflow and SageMaker support scalable training infrastructure, A/B testing, and are well-suited for Kubernetes-based cloud-native solutions. MLflow makes it simple to manage the complete lifecycle of your model.
 
-4. Model Registry
+### 4. Model Registry
 
 * Role: Serve as a central place to store pre-trained models as well as managing these files and versioning and their associated metadata.
 
@@ -38,7 +38,7 @@ Explanation of Components:
 
 * Comment: The single source of truth for model version and model metadata makes deployment management.
 
-5. CI/CD Pipelines & Model Deployment Managing the CI/CD pipeline for machine learning 三.
+### 5. CI/CD Pipelines & Model Deployment Managing the CI/CD pipeline for machine learning 三.
 
 * Responsibility: Automate deployment, testing and version roll out of models.
 
@@ -46,7 +46,7 @@ Explanation of Components:
 
 * Rationale: GitLab CI - integration into source control is seamless. ArgoCD-as-a-service for continuous delivery on Kubernetes, for repeatable and auditable deployments.
 
-6. Production Deployments and Monitoring
+### 6. Production Deployments and Monitoring
 
 * Primary function: Deploy models, serve predictions, and monitor performance.
 
@@ -54,7 +54,7 @@ Explanation of Components:
 
 * Rationale: Kubernetes smoothes out reliable scale and deployment. Prometheus and Grafana are the observability tools for the model’s health.
 
-7. User/Application Access
+### 7. User/Application Access
 
 * Role: Providing external systems and users easy and secure access to predictions.
 
