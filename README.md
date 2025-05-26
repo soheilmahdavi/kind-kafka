@@ -38,7 +38,7 @@
 
 * Comment: The single source of truth for model version and model metadata makes deployment management.
 
-### 5. CI/CD Pipelines & Model Deployment Managing the CI/CD pipeline for machine learning 三.
+### 5. CI/CD Pipelines & Model Deployment Managing:
 
 * Responsibility: Automate deployment, testing and version roll out of models.
 
