@@ -1,5 +1,6 @@
 # docker-compose.yml
 version: "3.9"
+
 services:
   zookeeper:
     image: bitnami/zookeeper:3.9
@@ -16,13 +17,22 @@ services:
       KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
     depends_on: [zookeeper]
 
+    # 👇 ADD THIS 👇 — a very cheap TCP health-check
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/localhost/9092"]
+      interval: 5s
+      timeout: 3s
+      retries: 12   # ~1 minute max
+
   consumer:
     image: kafka-consumer:test
+    restart: unless-stopped          # keep retrying if it ever dies
     env_file:
       - kafka-consumer/.env.shared
-      # - kafka-consumer/.env.secret        # ← CHANGED (commented out – not needed for PLAINTEXT)
     environment:
-      KAFKA_BOOTSTRAP_SERVER: kafka:9092    # already overrides the host
-      KAFKA_SECURITY_PROTOCOL: PLAINTEXT    # ← CHANGED (disable SASL)
-      KAFKA_SASL_MECHANISM: ""              # ← CHANGED (empty so client won’t try SCRAM)
-    depends_on: [kafka]
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
+      KAFKA_SECURITY_PROTOCOL: PLAINTEXT
+      KAFKA_SASL_MECHANISM: ""       # blank ⇒ client won’t try SCRAM
+    depends_on:
+      kafka:
+        condition: service_healthy   # 👈 wait for the health-check

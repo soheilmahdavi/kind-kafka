@@ -1,4 +1,11 @@
-# Tasks
+# high-level architectural design
+<h1 align="center">
+<img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/HighLevel-Overview.svg" width="1000">
+</h1><br>
+
+
+
+# Tasks 1
 1. Containerization
   - [x] Create a Dockerfile for each microservice.
   - [x] Choose an appropriate base image and install the necessary dependencies.  
