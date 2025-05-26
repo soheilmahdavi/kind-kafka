@@ -4,6 +4,39 @@
 </h1><br>
 
 
+Explanation of Components:
+
+1. Data Collection & Storage
+
+* Role: Storage and versioning of raw image data.
+
+* Instruments: AWS S3, Azure Blob Storage, MinIO.
+
+* Rationale: scalable, reliable, affordable storage devices and services are now available, ideal for storing image and versions on.
+
+2. Preprocessing of Data and Features Extraction
+
+* Role: Cleanse, resize, normalize and extract features from raw image data.
+
+* Tools: AWS Glue, Apache Airflow, Kubeflow Pipelines.
+
+* Rationale: Workflow automation, being able to reproduce the preprocessing and use it as part of ML workflows.
+
+3. Model Training
+
+* Role: Training and validation of ML models with automated standardized workflows.
+
+* Tools: Kubeflow, Amazon SageMaker, MLflow.
+
+* Explanation: Kubeflow and SageMaker support scalable training infrastructure, A/B testing, and are well-suited for Kubernetes-based cloud-native solutions. MLflow makes it simple to manage the complete lifecycle of your model.
+
+4. Model Registry
+
+* Role: Serve as a central place to store pre-trained models as well as managing these files and versioning and their associated metadata.
+
+* Tools: MLflow Model Registry, Amazon SageMaker Model Registry.
+
+* Comment: The single source of truth for model version and model metadata makes deployment management.
 
 # Tasks 1
 1. Containerization
