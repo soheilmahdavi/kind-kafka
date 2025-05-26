@@ -38,6 +38,31 @@ Explanation of Components:
 
 * Comment: The single source of truth for model version and model metadata makes deployment management.
 
+5. CI/CD Pipelines & Model Deployment Managing the CI/CD pipeline for machine learning 三.
+
+* Responsibility: Automate deployment, testing and version roll out of models.
+
+* Techstack: We currently use GitLab CI, ArgoCD and Jenkins.
+
+* Rationale: GitLab CI - integration into source control is seamless. ArgoCD-as-a-service for continuous delivery on Kubernetes, for repeatable and auditable deployments.
+
+6. Production Deployments and Monitoring
+
+* Primary function: Deploy models, serve predictions, and monitor performance.
+
+* Thou shalt leverage the following tools and platforms: Kubernetes (for deployed scalable deployments), Prometheus (for monitoring & metrics), Grafana (for visualization).
+
+* Rationale: Kubernetes smoothes out reliable scale and deployment. Prometheus and Grafana are the observability tools for the model’s health.
+
+7. User/Application Access
+
+* Role: Providing external systems and users easy and secure access to predictions.
+
+* Tools: API Gateway, REST APIs (e.g., AWS API Gateway, Kong, Ambassador).
+
+* Justification: Simplifies integration with applications, provides secure, standardized interfaces
+
+---
 # Tasks 1
 1. Containerization
   - [x] Create a Dockerfile for each microservice.
