@@ -10,7 +10,7 @@
 
 * Role: Storage and versioning of raw image data.
 
-* Instruments: AWS S3, Azure Blob Storage, MinIO.
+* Instruments: **MinIO**, AWS S3, Azure Blob Storage.
 
 * Rationale: scalable, reliable, affordable storage devices and services are now available, ideal for storing image and versions on.
 
@@ -18,7 +18,7 @@
 
 * Role: Cleanse, resize, normalize and extract features from raw image data.
 
-* Tools: AWS Glue, Apache Airflow, Kubeflow Pipelines.
+* Tools: **Tekton**,AWS Glue, Apache Airflow, Kubeflow Pipelines.
 
 * Rationale: Workflow automation, being able to reproduce the preprocessing and use it as part of ML workflows.
 
@@ -26,7 +26,7 @@
 
 * Role: Training and validation of ML models with automated standardized workflows.
 
-* Tools: Kubeflow, Amazon SageMaker, MLflow.
+* Tools: Kubeflow, Amazon SageMaker, **MLflow**.
 
 * Explanation: Kubeflow and SageMaker support scalable training infrastructure, A/B testing, and are well-suited for Kubernetes-based cloud-native solutions. MLflow makes it simple to manage the complete lifecycle of your model.
 
@@ -34,7 +34,7 @@
 
 * Role: Serve as a central place to store pre-trained models as well as managing these files and versioning and their associated metadata.
 
-* Tools: MLflow Model Registry, Amazon SageMaker Model Registry.
+* Tools: **MLflow Model Registry**, Amazon SageMaker Model Registry.
 
 * Comment: The single source of truth for model version and model metadata makes deployment management.
 
@@ -42,15 +42,15 @@
 
 * Responsibility: Automate deployment, testing and version roll out of models.
 
-* Techstack: We currently use GitLab CI, ArgoCD and Jenkins.
+* Techstack: We can use any **SCM** GitLab CI, ArgoCD and **Jenkins**.
 
-* Rationale: GitLab CI - integration into source control is seamless. ArgoCD-as-a-service for continuous delivery on Kubernetes, for repeatable and auditable deployments.
+* Rationale: GitLab CI(or other **SCM**) - integration into source control is seamless. ArgoCD-as-a-service for continuous delivery on Kubernetes, for repeatable and auditable deployments.
 
 ### 6. Production Deployments and Monitoring
 
 * Primary function: Deploy models, serve predictions, and monitor performance.
 
-* Thou shalt leverage the following tools and platforms: Kubernetes (for deployed scalable deployments), Prometheus (for monitoring & metrics), Grafana (for visualization).
+* tools and platforms: **Kubernetes** (for deployed scalable deployments), **Prometheus** (for monitoring & metrics), **Grafana** (for visualization).
 
 * Rationale: Kubernetes smoothes out reliable scale and deployment. Prometheus and Grafana are the observability tools for the model’s health.
 
@@ -58,7 +58,7 @@
 
 * Role: Providing external systems and users easy and secure access to predictions.
 
-* Tools: API Gateway, REST APIs (e.g., AWS API Gateway, Kong, Ambassador).
+* Tools: **OpenShift Service Mesh (Istio) / Ingress Controller**, API Gateway, REST APIs.
 
 * Justification: Simplifies integration with applications, provides secure, standardized interfaces
 
