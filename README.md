@@ -1,4 +1,4 @@
-# high-level architectural design
+# TASK 2: high-level architectural design
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/soheilmahdavi/kind-kafka/main/docs/images/HighLevel-Overview.svg" width="1000">
 </h1><br>
