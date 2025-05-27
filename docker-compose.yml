@@ -1,4 +1,3 @@
-# docker-compose.yml
 version: "3.9"
 
 services:
@@ -22,17 +21,17 @@ services:
       test: ["CMD", "bash", "-c", "echo > /dev/tcp/localhost/9092"]
       interval: 5s
       timeout: 3s
-      retries: 12   # ~1 minute max
+      retries: 12 
 
   consumer:
     image: kafka-consumer:test
-    restart: unless-stopped          # keep retrying if it ever dies
+    restart: unless-stopped 
     env_file:
       - kafka-consumer/.env.shared
     environment:
       KAFKA_BOOTSTRAP_SERVER: kafka:9092
       KAFKA_SECURITY_PROTOCOL: PLAINTEXT
-      KAFKA_SASL_MECHANISM: ""       # blank ⇒ client won’t try SCRAM
+      KAFKA_SASL_MECHANISM: "" 
     depends_on:
       kafka:
-        condition: service_healthy   # 👈 wait for the health-check
+        condition: service_healthy  

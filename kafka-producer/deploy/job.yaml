@@ -13,8 +13,8 @@ spec:
         envFrom:
         - configMapRef:
             name: kafka-producer-config
- #       - secretRef:
- #           name: kafka-producer-credentials
+        - secretRef:
+            name: kafka-producer-credentials
         env:
         - name: KAFKA_BOOTSTRAP_SERVER
           value: kafka.default.svc.cluster.local:9092
