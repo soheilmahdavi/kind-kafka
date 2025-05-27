@@ -15,6 +15,7 @@ spec:
       containers:
         - name: consumer
           image: "{{ .Values.consumer.image.repository }}:{{ .Values.consumer.image.tag }}"
+          imagePullPolicy: {{ .Values.consumer.image.pullPolicy }}
           envFrom:
             - configMapRef:
                 name: {{ include "kafka-app.fullname" . }}-consumer-cm

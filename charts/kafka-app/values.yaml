@@ -12,6 +12,7 @@ consumer:
   image:
     repository: localhost:5000/kafka-consumer
     tag: "1.0.6"
+    pullPolicy: IfNotPresent
   config:
     DEBUG: "False"
     KAFKA_TOPIC: "test"
@@ -29,6 +30,7 @@ producer:
   image:
     repository: localhost:5000/kafka-producer
     tag: "1.0.6"
+    pullPolicy: IfNotPresent
   config:
     DEBUG: "False"
     KAFKA_TOPIC: "test"

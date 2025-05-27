@@ -10,6 +10,7 @@ spec:
       containers:
       - name: producer
         image: "{{ .Values.producer.image.repository }}:{{ .Values.producer.image.tag }}"
+        imagePullPolicy: {{ .Values.producer.image.pullPolicy }}
         envFrom:
           - configMapRef:
               name: {{ include "kafka-app.fullname" . }}-producer-cm
