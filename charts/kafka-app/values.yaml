@@ -1,0 +1,42 @@
+replicaCount: 1
+
+kafka:
+  enabled: true
+  replicaCount: 1
+  auth:
+    enabled: false
+  zookeeper:
+    enabled: true
+
+consumer:
+  image:
+    repository: localhost:5000/kafka-consumer
+    tag: "1.0.6"
+  config:
+    DEBUG: "False"
+    KAFKA_TOPIC: "test"
+    KAFKA_BOOTSTRAP_SERVER: "kafka-app-dev-kafka:9092"
+    KAFKA_CONSUMER_GROUP: "admin"
+    KAFKA_SECURITY_PROTOCOL: "PLAINTEXT"
+    KAFKA_SASL_MECHANISM: ""
+  secret:
+    KAFKA_USERNAME: "admin"
+    KAFKA_PASSWORD: "admin"
+  service:
+    port: 8080
+
+producer:
+  image:
+    repository: localhost:5000/kafka-producer
+    tag: "1.0.6"
+  config:
+    DEBUG: "False"
+    KAFKA_TOPIC: "test"
+    KAFKA_BOOTSTRAP_SERVER: "kafka:9092"
+    KAFKA_SECURITY_PROTOCOL: "PLAINTEXT"
+    KAFKA_SASL_MECHANISM: ""
+  secret:
+    KAFKA_USERNAME: "admin"
+    KAFKA_PASSWORD: "admin"
+  job:
+    backoffLimit: 3

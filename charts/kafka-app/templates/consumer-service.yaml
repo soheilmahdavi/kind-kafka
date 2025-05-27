@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "kafka-app.fullname" . }}-consumer-svc
+spec:
+  selector:
+    app: {{ include "kafka-app.fullname" . }}-consumer
+  ports:
+    - port: {{ .Values.consumer.service.port }}
+      targetPort: {{ .Values.consumer.service.port }}

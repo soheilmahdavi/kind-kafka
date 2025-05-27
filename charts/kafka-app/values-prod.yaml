@@ -1,0 +1,29 @@
+replicaCount: 3
+
+kafka:
+  enabled: true
+  replicaCount: 3
+  auth:
+    enabled: true
+  zookeeper:
+    enabled: true
+
+consumer:
+  config:
+    KAFKA_BOOTSTRAP_SERVER: "kafka.prod.svc.cluster.local:9092"
+    KAFKA_SECURITY_PROTOCOL: "SASL_PLAINTEXT"
+    KAFKA_SASL_MECHANISM: "SCRAM-SHA-512"
+  secret:
+    KAFKA_USERNAME: "prod-user"
+    KAFKA_PASSWORD: "prod-pass"
+
+producer:
+  config:
+    KAFKA_BOOTSTRAP_SERVER: "kafka.prod.svc.cluster.local:9092"
+    KAFKA_SECURITY_PROTOCOL: "SASL_PLAINTEXT"
+    KAFKA_SASL_MECHANISM: "SCRAM-SHA-512"
+  secret:
+    KAFKA_USERNAME: "prod-user"
+    KAFKA_PASSWORD: "prod-pass"
+  job:
+    backoffLimit: 5

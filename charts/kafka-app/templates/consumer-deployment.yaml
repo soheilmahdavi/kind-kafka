@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kafka-app.fullname" . }}-consumer
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "kafka-app.fullname" . }}-consumer
+  template:
+    metadata:
+      labels:
+        app: {{ include "kafka-app.fullname" . }}-consumer
+    spec:
+      containers:
+        - name: consumer
+          image: "{{ .Values.consumer.image.repository }}:{{ .Values.consumer.image.tag }}"
+          envFrom:
+            - configMapRef:
+                name: {{ include "kafka-app.fullname" . }}-consumer-cm
+            - secretRef:
+                name: {{ include "kafka-app.fullname" . }}-consumer-secret
+          ports:
+            - containerPort: {{ .Values.consumer.service.port }}
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          readinessProbe:
+            exec: { command: ["sh","-c","echo ok"] }
+            periodSeconds: 30
+          livenessProbe:
+            exec: { command: ["sh","-c","echo ok"] }
+            periodSeconds: 60

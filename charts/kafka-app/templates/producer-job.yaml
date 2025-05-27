@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "kafka-app.fullname" . }}-producer
+spec:
+  backoffLimit: {{ .Values.producer.job.backoffLimit }}
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: producer
+        image: "{{ .Values.producer.image.repository }}:{{ .Values.producer.image.tag }}"
+        envFrom:
+          - configMapRef:
+              name: {{ include "kafka-app.fullname" . }}-producer-cm
+          - secretRef:
+              name: {{ include "kafka-app.fullname" . }}-producer-secret
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
